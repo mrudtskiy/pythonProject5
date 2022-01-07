@@ -50,13 +50,13 @@ class Man:
         if self.fullness <= 0:
             print(f'{self.name} is dead.')
             return
-        dice = random.randint(1,3)
+        dice = random.randint(1,6)
         if self.fullness < 20:
             self.eat()
-        # elif self.house.food < 10:
-        #     self.shopping()
-        # elif self.house.money < 50:
-        #     self.work()
+        elif self.house.food < 10:
+            self.shopping()
+        elif self.house.money < 50:
+            self.work()
         elif dice == 1:
             self.work()
         elif dice == 2:
@@ -77,21 +77,26 @@ class House:
         return f'Food left at home {self.food}, money left at home {self.money}'
 
 
-beavis = Man(name='Beavis')
-butthead = Man(name='Butthead')
+citizens = [
+    Man(name='Beavis'),
+    Man(name='Butthead'),
+    Man(name='John')
+]
+
+
 
 my_sweet_home = House()
-beavis.go_house(house=my_sweet_home)
-butthead.go_house(house=my_sweet_home)
 
-
-
+for citizen in citizens:
+    citizen.go_house(house=my_sweet_home)
 
 for day in range(1, 21):
     cprint('================day{}=================='.format(day), color='yellow')
-    beavis.act()
-    butthead.act()
+    for citizen in citizens:
+        citizen.act()
     print('----------------at the enf of the day-----------------------')
+    for citizen in citizens:
+        print(citizen)
     print(my_sweet_home)
-    print(beavis)
-    print(butthead)
+
+
