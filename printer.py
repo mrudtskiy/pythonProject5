@@ -9,6 +9,7 @@ class Man:
         self.fullness = 50
         self.house = None
 
+
     def __str__(self):
         return f'I am {self.name}, my fulness is {self.fullness}'
 
@@ -25,8 +26,8 @@ class Man:
         self.house.money += 150
         self.fullness -= 10
 
-    def play(self):
-        print('{} played DOTa all the day'.format(self.name))
+    def watch_MTV(self):
+        print('{} watching MTV all the day'.format(self.name))
         self.fullness -= 10
 
     def shopping(self):
@@ -49,19 +50,19 @@ class Man:
         if self.fullness <= 0:
             print(f'{self.name} is dead.')
             return
-        dice = random.randint(1,21)
+        dice = random.randint(1,3)
         if self.fullness < 20:
             self.eat()
-        elif self.house.food < 10:
-            self.shopping()
-        elif self.house.money < 50:
-            self.work()
+        # elif self.house.food < 10:
+        #     self.shopping()
+        # elif self.house.money < 50:
+        #     self.work()
         elif dice == 1:
             self.work()
         elif dice == 2:
             self.eat()
         else:
-            self.play()
+            self.watch_MTV()
 
 
 
@@ -73,15 +74,24 @@ class House:
         self.money = 50
 
     def __str__(self):
-        return f'I am {self.name}, my fulness is {self.fullness}'
+        return f'Food left at home {self.food}, money left at home {self.money}'
 
 
 beavis = Man(name='Beavis')
 butthead = Man(name='Butthead')
 
-for day in range(1, 366):
+my_sweet_home = House()
+beavis.go_house(house=my_sweet_home)
+butthead.go_house(house=my_sweet_home)
+
+
+
+
+for day in range(1, 21):
     cprint('================day{}=================='.format(day), color='yellow')
     beavis.act()
     butthead.act()
+    print('----------------at the enf of the day-----------------------')
+    print(my_sweet_home)
     print(beavis)
     print(butthead)
